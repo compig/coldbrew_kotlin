@@ -35,11 +35,11 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
-    implementation("org.springframework.boot:spring-boot-starter-security:2.6.3")
+    implementation("org.springframework.boot:spring-boot-starter-security:2.6.4")
     implementation("org.springframework.boot:spring-boot-starter-validation:2.6.3")
 
     implementation("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.6.3")
-    implementation("org.springframework.social:spring-social-core:1.1.6.RELEASE")
+    implementation("org.springframework.security:spring-security-oauth2-authorization-server:0.2.2")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -67,8 +67,10 @@ dependencies {
     kaptTest("org.mapstruct:mapstruct-processor:1.4.2.Final")
 
     implementation("com.google.code.gson:gson:2.9.0")
+    implementation("com.googlecode.json-simple:json-simple:1.1.1")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.security:spring-security-test:5.6.2")
 
 }
 

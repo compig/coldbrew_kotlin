@@ -1,6 +1,5 @@
 package com.compig.init.controller
 
-import com.compig.init.domain.user.dto.UserLogin
 import com.compig.init.domain.user.dto.UserSignUp
 import com.compig.init.domain.user.dto.UserUpdate
 import com.compig.init.domain.user.enumm.UserStatus

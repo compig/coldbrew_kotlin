@@ -9,5 +9,6 @@ enum class SecurityExceptionErrorCode(
     override val httpStatus: HttpStatus,
 ) :
     ExceptionProperty {
-    NOT_FOUND_USER_EMAIL("not found user Email.", "아이디가 없습니다.", HttpStatus.BAD_REQUEST)
+    NOT_FOUND_USER_EMAIL("not found user Email.", "아이디가 없습니다.", HttpStatus.BAD_REQUEST),
+    JWT_EXPIRED("Jwt Token Expired", "토큰이 만료되었습니다.", HttpStatus.UNAUTHORIZED)
 }

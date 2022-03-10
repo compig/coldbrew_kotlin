@@ -1,16 +1,12 @@
 package com.compig.init.domain.user.service
 
-import com.compig.init.common.security.JwtTokenProvider
-import com.compig.init.domain.user.dto.UserLogin
 import com.compig.init.domain.user.dto.UserSignUp
 import com.compig.init.domain.user.dto.UserUpdate
 import com.compig.init.domain.user.entity.User
 import com.compig.init.domain.user.entity.UserRepository
-import com.compig.init.domain.user.exceptions.NotFoundUserEmailException
 import com.compig.init.domain.user.mapping.UserMapper
 import org.hibernate.DuplicateMappingException
 import org.modelmapper.ModelMapper
-import org.springframework.dao.InvalidDataAccessApiUsageException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import javax.transaction.Transactional
@@ -21,7 +17,6 @@ class UserService(
     private val passwordEncoder: PasswordEncoder,
     private val userRepository: UserRepository,
     private val modelMapper: ModelMapper,
-    private val jwtTokenProvider: JwtTokenProvider,
 
     ) {
     fun createUserModelMapper(userSignUpReq: UserSignUp.UserSignUpReq): UserSignUp.UserSignUpRep {
@@ -63,20 +58,6 @@ class UserService(
 
     fun findUser(userEmail: String): User {
         return userRepository.findByUserEmail(userEmail) ?: throw NullPointerException("user not found.")
-    }
-
-    fun login(userLoginReq: UserLogin.UserLoginReq): UserLogin.UserLoginRep {
-        if (!existUser(userLoginReq.userEmail)) {
-            throw NotFoundUserEmailException.EXCEPTION
-        }
-        val user: User = findUser(userLoginReq.userEmail)
-
-        if (!passwordEncoder.matches(userLoginReq.userPassword, user.password)) {
-            throw InvalidDataAccessApiUsageException("invalid password.")
-        }
-
-        return UserLogin.UserLoginRep(
-            token = jwtTokenProvider.createToken(user.userEmail), user)
     }
 
     fun userUpdate(userUpdateReq: UserUpdate.UserUpdateReq): UserUpdate.UserUpdateRep {

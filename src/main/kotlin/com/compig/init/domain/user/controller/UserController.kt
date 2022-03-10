@@ -1,7 +1,6 @@
 package com.compig.init.domain.user.controller
 
 import com.compig.init.common.config.logger
-import com.compig.init.domain.user.dto.UserLogin
 import com.compig.init.domain.user.dto.UserSignUp
 import com.compig.init.domain.user.dto.UserUpdate
 import com.compig.init.domain.user.entity.User
@@ -28,13 +27,6 @@ class UserController(
     fun signUp(@RequestBody @Valid userSignUpReq: UserSignUp.UserSignUpReq): ResponseEntity<UserSignUp.UserSignUpRep> {
         return ResponseEntity.ok(
             userService.createUser(userSignUpReq)
-        )
-    }
-
-    @PostMapping("/login")//TODO controller 따로 빼기
-    fun signUp(@RequestBody userLoginReq: UserLogin.UserLoginReq): ResponseEntity<UserLogin.UserLoginRep> {
-        return ResponseEntity.ok(
-            userService.login(userLoginReq)
         )
     }
 
